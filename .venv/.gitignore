@@ -1,23 +1,6 @@
-# Virtual environment
 .venv/
-
-# Python cache files
-__pycache__/
-*.py[cod]
-
-# PyCharm project files
 .idea/
-
-# Environment variables
-.env
-
-# Logs
-*.log
-
-# Temporary files
-tmp/
-temp/
-
-# Build artifacts
-dist/
-build/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
