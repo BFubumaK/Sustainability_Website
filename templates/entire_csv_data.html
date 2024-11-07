@@ -32,14 +32,32 @@
 
 <!-- KWH List Section -->
 <div class="container my-5">
-    <h1>Most Recent KWH Data</h1>
-    <ul>
-        {% for entry in kwh %}
-            <li>Date: {{ entry[0] }} - KWH: {{ entry[1] }}</li>  <!-- Adjust indices based on your table structure -->
-        {% endfor %}
-    </ul>
-</div>
+    <h2 class="table-header-name">Real-Time Kilowatt-Hour Data</h2>
 
+    <!-- Table to display data -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Meter Reading (kWh)</th>
+                    <th>Meter Name</th>
+                    <th>Stuck</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in kwh %}
+                    <tr>
+                        <td>{{ entry[0] }}</td>  <!-- display datetime -->
+                        <td>{{ entry[1] }}</td>  <!-- display meter reading -->
+                        <td>{{ entry[2] }}</td>  <!-- display meter name -->
+                        <td>{{ entry[3] }}</td>  <!-- display stuck status -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <!-- Footer -->
 <footer>

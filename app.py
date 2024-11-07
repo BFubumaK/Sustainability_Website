@@ -19,26 +19,32 @@ def get_db_connection():
 def home():
     return render_template('index.html')
 
-# Render database page with most recent KWH data
+
+# Render database page with most recent KWH data, sorted by meter name
 @app.route('/show_entire_csv_data', methods=['GET'])
 def show_recent_data():
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # Fetch only the most recent data (e.g., last 10 records) from the postgres schema
-    cur.execute('SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh ORDER BY datetime DESC LIMIT 10;')
+    # Fetch only the most recent data (e.g., last 156 records) from the postgres schema
+    cur.execute('SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh ORDER BY datetime DESC LIMIT 156;')
     kwh = cur.fetchall()
 
     cur.close()
     conn.close()
 
-    # Render template with KWH data
-    return render_template('entire_csv_data.html', kwh=kwh)
+    # Sort data by the meter name (3rd column, index 2)
+    kwh_sorted = sorted(kwh, key=lambda entry: entry[2].lower())  # Sort alphabetically by meter_name
+
+    # Render template with sorted KWH data
+    return render_template('entire_csv_data.html', kwh=kwh_sorted)
+
 
 # Render visualization page
 @app.route('/visualization', methods=['GET', 'POST'])
 def visualization():
     return render_template('visualization.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

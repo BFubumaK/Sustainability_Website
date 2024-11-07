@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 // Create an Express application
 const app = express();
-const port = 3000; // Default port
+const port = 3000; // default port
 
 // Create a Postgres connection with schema 'kwh' and table 'kwh'
 const pool = new Pool({
@@ -14,7 +14,7 @@ const pool = new Pool({
   host: 'localhost',
   database: 'postgres',
   password: 'Uhosremote!',
-  port: 5433, // Default port
+  port: 5433, // default port
 });
 
 // Middleware to serve static files
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 // Route handler for GET KWH data (fetching only the 10 most recent records)
 app.get('/kwh', (req, res) => {
   // SQL query to fetch data from schema 'kwh' and table 'kwh'
-  const query = 'SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh ORDER BY datetime DESC LIMIT 10;';
+  const query = 'SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh ORDER BY datetime DESC LIMIT 156;';
 
   pool.query(query, (error, result) => {
     if (error) {
