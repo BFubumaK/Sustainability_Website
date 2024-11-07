@@ -36,7 +36,7 @@ def show_recent_data():
     conn.close()
 
     # Sort data by the meter name (3rd column, index 2)
-    kwh_sorted = sorted(kwh, key=lambda entry: entry[2].lower())  # Sort alphabetically by meter_name
+    kwh_sorted = sorted(kwh, key=lambda entry: entry[2].lower()) # sort alphabetically by meter_name
 
     # Render template with sorted KWH data
     return render_template('entire_csv_data.html', kwh=kwh_sorted)
