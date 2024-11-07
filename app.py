@@ -1,5 +1,5 @@
 # Import required modules
-from flask import Flask, request, render_template
+from flask import Flask, render_template
 import psycopg2
 import os
 import secrets

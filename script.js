@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Route handler for GET KWH data (fetching only the 10 most recent records)
+// Route handler for GET KWH data (fetch only the 156 most recent records)
 app.get('/kwh', (req, res) => {
   // SQL query to fetch data from schema 'kwh' and table 'kwh'
   const query = 'SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh ORDER BY datetime DESC LIMIT 156;';
