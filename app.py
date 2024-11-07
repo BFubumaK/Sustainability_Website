@@ -8,11 +8,13 @@ import secrets
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(16))
 
+
 # Database connection setup
 def get_db_connection():
     # Connect to the postgres database
     conn = psycopg2.connect(database="postgres", user="postgres", password="Uhosremote!", port="5433")
     return conn
+
 
 # Render home page
 @app.route('/', methods=['GET', 'POST'])
