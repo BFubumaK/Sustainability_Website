@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 // Route handler for GET KWH data (fetch only the 156 most recent records)
 app.get('/kwh', (req, res) => {
   // SQL query to fetch data from schema 'kwh' and table 'kwh'
-  const query = 'SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh ORDER BY datetime DESC LIMIT 156;';
+  const query = 'SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh_last24hrs ORDER BY datetime DESC LIMIT 156;';
 
   pool.query(query, (error, result) => {
     if (error) {

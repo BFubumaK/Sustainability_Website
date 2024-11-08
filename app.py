@@ -29,7 +29,7 @@ def show_recent_data():
     cur = conn.cursor()
 
     # Fetch only the most recent data (e.g., last 156 records) from the postgres schema
-    cur.execute('SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh ORDER BY datetime DESC LIMIT 156;')
+    cur.execute('SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh_last24hrs ORDER BY datetime DESC LIMIT 156;')
     kwh = cur.fetchall()
 
     cur.close()
