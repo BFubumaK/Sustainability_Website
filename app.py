@@ -45,7 +45,21 @@ def show_recent_data():
 # Render visualization page
 @app.route('/visualization', methods=['GET', 'POST'])
 def visualization():
-    return render_template('visualization.html')
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Fetch distinct meter names from the database
+    cur.execute('SELECT DISTINCT meter_name FROM kwh.kwh_last24hrs ORDER BY meter_name;')
+    meter_names = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    # Extract meter names from the result (list of tuples)
+    meter_names_list = [meter[0] for meter in meter_names]
+
+    # Render the visualization template and pass meter names
+    return render_template('visualization.html', meters=meter_names_list)
 
 
 if __name__ == '__main__':

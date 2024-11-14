@@ -1,208 +1,151 @@
-/* General styles */
+/* General body styles */
 body {
   font-family: 'PT Serif', serif;
-  background-color: #FFFFFF;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  min-height: 121vh;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
 }
 
-/* Body background image */
-.body-background {
-  background-image: url('https://images.pexels.com/photos/2521619/pexels-photo-2521619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  background-size: cover;
-}
-
-.container {
-  overflow-x: hidden;
-  position: relative;
-}
-
-.office-of-sustainability-section {
-  padding: 5px;
-}
-
-/* Text styles */
-.text-center {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  color: #FFFFFF;
-  font-size: 80px;
-}
-
-.csv-upload-message,
-.csv-data-text-center,
-.table-header-name,
-.view-database-section-title,
-.database-title,
-.label {
-  color: #D27D46;
-}
-
-.label {
-  padding: 5px;
-}
-
-.csv-upload-message {
-  font-size: 16px;
-  position: relative;
-  text-align: left;
-}
-
-.database-title {
-  font-size: 50px;
-  text-align: center;
-}
-
-/* Button styles */
-.btn-secondary {
-  background-color: #D27D46;
-  border-color: #D27D46;
-}
-
-.btn-secondary:hover {
-  background-color: #B95B3A;
-  border-color: #B95B3A;
-}
-
-/* Navbar styles */
 .navbar {
-  padding: 20px;
+  background-color: #00796b;
+  color: white;
+  padding: 10px 0;
 }
 
-.navbar-brand img {
-  max-height: 100px;
+.navbar .navbar-brand img {
+  max-height: 50px;
 }
 
-.nav-link {
-  color: black;
-  margin: 0 0 0 20px;
-  font-size: 18px;
+.navbar .nav-link {
+  color: white !important;
 }
 
-/* Footer styles */
-footer {
-  background-color: black;
-  color: #FFFFFF;
-  text-align: left;
-  margin: auto 0 0 0;
+.navbar .social-icons a {
+  color: white;
+  margin-left: 10px;
+  font-size: 1.5rem;
 }
 
-footer h2 {
-  font-size: 20px;
-  margin: 20px 0 10px 0;
+.navbar .social-icons a:hover {
+  color: #ffeb3b;
 }
 
-footer .col {
-  font-size: 15px;
+/* Page Container */
+.container {
+  padding: 40px 20px;
 }
 
-footer a {
-  color: #FFFFFF;
-  text-decoration: none;
+/* Table styling */
+.table {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-top: 30px;
 }
 
-footer .col.text-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-footer .col:nth-child(2) a {
-  color: #D27D46;
-}
-
-footer .col:nth-child(2) a:hover {
-  color: #B95B3A;
-}
-
-/* Social icons */
-.social-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: -2px 105px 0 0;
-}
-
-.social-icons a {
-  color: #D27D46;
-  font-size: 30px;
-}
-
-.social-icons a:hover {
-  color: #B95B3A;
-}
-
-/* Image in view database section */
-.database-image {
-  max-width: 100%;
-  padding: 10px;
-}
-
-/* Database section styles */
-.view-database-section {
-  background-color: #F6F6F6;
-  max-width: 92%;
-  margin: 0 auto;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  border-radius: 15px;
-}
-
-.view-database-section img {
-  padding: 10px;
-}
-
-h4 {
-  margin: 0 0 0 5px;
-}
-
-/* Table styles */
 .table th, .table td {
-  text-align: left;
-  padding: 15px;
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .table th {
-  background-color: #F8F9FA;
+  background-color: #00796b;
+  color: white;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table .table-header-name {
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Pagination styles */
-.pagination {
-  display: flex;
-  justify-content: center;
+/* Form styles */
+form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.pagination .page-item {
-  margin: 0 5px 0 0;
+form .form-label {
+  font-weight: bold;
 }
 
-.pagination .page-link {
-  color: #D27D46;
-  background-color: #FFFFFF;
-  border: 1px solid #D27D46;
+form .form-select {
+  padding: 10px;
+  font-size: 1rem;
 }
 
-.pagination .page-link:hover,
-.pagination .active .page-link {
-  background-color: #D27D46;
-  color: #FFFFFF;
+form button {
+  background-color: #00796b;
+  color: white;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 
-#page-input {
-  width: 100px;
+form button:hover {
+  background-color: #004d40;
+  cursor: pointer;
 }
 
-/* Fade in animation */
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 2s forwards;
+/* Footer Styles */
+footer {
+  background-color: #00796b;
+  color: white;
+  padding: 20px 0;
+  margin-top: 30px;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+footer h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+footer ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+footer ul li a:hover {
+  color: #ffeb3b;
+}
+
+footer .social-icons a {
+  color: white;
+  margin: 0 10px;
+}
+
+footer .social-icons a:hover {
+  color: #ffeb3b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table th, .table td {
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 20px 10px;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  footer {
+    padding: 15px 0;
   }
 }
