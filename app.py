@@ -1,5 +1,5 @@
 # Import required modules
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import psycopg2
 import os
 import secrets
@@ -58,8 +58,12 @@ def visualization():
     # Extract meter names from the result (list of tuples)
     meter_names_list = [meter[0] for meter in meter_names]
 
-    # Render the visualization template and pass meter names
-    return render_template('visualization.html', meters=meter_names_list)
+    selected_meter = None
+    if request.method == 'POST':
+        selected_meter = request.form.get('meter_name')
+
+    # Render the visualization template and pass meter names and selected meter
+    return render_template('visualization.html', meters=meter_names_list, selected_meter=selected_meter)
 
 
 if __name__ == '__main__':
