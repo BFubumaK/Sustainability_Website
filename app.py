@@ -1,8 +1,9 @@
 # Import required modules
-from flask import Flask, render_template
-import psycopg2
 import os
 import secrets
+
+import psycopg2
+from flask import Flask, render_template
 
 # Initialize Flask app
 app = Flask(__name__)

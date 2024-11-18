@@ -251,7 +251,7 @@
   };
 
   // Update the iframe source based on the selected meter
-  meterNameSelect.addEventListener('change', function() {
+  meterNameSelect.addEventListener('change', function () {
     const selectedMeter = this.value;
     meterGraph.src = grafanaUrls[selectedMeter] || '';
   });
