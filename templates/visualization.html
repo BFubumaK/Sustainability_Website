@@ -104,24 +104,14 @@
 
   // Map meter names to buildings
   const metersByBuilding = {
-    'admin_serv_1': ['admin_serv_1'],
-    'admin_serv_2_main': ['admin_serv_2_main'],
-    'ag_engineering_main': ['ag_engineering_main'],
-    'ag_engineering_mcc': ['ag_engineering_mcc'],
-    'ag_science_main_1': ['ag_science_main_1'],
-    'ag_science_main_2': ['ag_science_main_2'],
-    // Add all relevant meter names per building
-    // Example:
-    'andrews_amp_main': ['andrews_amp_main'],
-    'architecture_main': ['architecture_main'],
-    'bachman_hall_main': ['bachman_hall_main'],
-    'biomedical_science_ch_1': ['biomedical_science_ch_1'],
-    'biomedical_science_ch_2': ['biomedical_science_ch_2'],
-    // etc...
+    'MB1': ['lincoln_hall_main', 'hale_kuahine_main', 'korean_studies_main', 'hale_laulima_main', 'archtecture_main', 'hale_kahawai_main'],
+    'MB2': ['gilmore_hall_main_a', 'gilmore_hall_main_b', 'gilmore_hall_mcc', 'ag_engineering_main', 'ag_engineering_mcc', 'webster_hall_main'],
+    'MB3': ['hig_noaa', 'hig_panel_pb', 'hig_panel_pba', 'hig_substation_1_main', 'hig_substation_2_main', 'hig_substation_3_main', 'sakamaki_hall_ac_eqpt', 'sakamaki_hall_main'],
+    'LB4': ['saunders_hall_main_a', 'saunders_hall_main_b', 'bus_ad_shidler_main', 'george_hall_main', 'crawford_hall_main', 'admin_serv_1', 'campus_ctr_main', 'hemenway_hall_kitchen', 'hemenway_hall_main']
   };
 
   // Event listener for building selection
-  buildingNameSelect.addEventListener('change', function() {
+  buildingNameSelect.addEventListener('change', function () {
     const selectedBuilding = this.value;
     const metersForBuilding = metersByBuilding[selectedBuilding] || [];
 
@@ -129,7 +119,7 @@
     meterNameSelect.innerHTML = '<option value="" disabled selected>Select a meter</option>';
 
     // Populate meter dropdown with relevant meters
-    metersForBuilding.forEach(function(meter) {
+    metersForBuilding.forEach(function (meter) {
       const option = document.createElement('option');
       option.value = meter;
       option.textContent = meter;
@@ -143,7 +133,6 @@
   // Map meter names to Grafana URLs
   const grafanaUrls = {
     'admin_serv_1': 'http://localhost:8081/public-dashboards/1be0fab2accf4ba88302f1677c6b9747',
-    // Add other meter mappings here
     'admin_serv_2_main': '',
     'ag_engineering_main': '',
     'ag_engineering_mcc': '',
@@ -180,7 +169,7 @@
     'george_hall_main': '',
     'gilmore_hall_main_a': '',
     'gilmore_hall_main_b': '',
-    '	gilmore_hall_mcc': '',
+    'gilmore_hall_mcc': '',
     'hale_aloha_ilima_tower_cafe': '',
     'hale_aloha_ilima_tower_main': '',
     'hale_aloha_lehua_tower_main': '',
@@ -189,6 +178,7 @@
     'hale_halawai_main': '',
     'hale_kahawai_main': '',
     'hale_kuahine_main': '',
+    'hale_laulima_main': '',
     'hale_manoa_main': '',
     'hale_noelani_all_towers_main': '',
     'hale_noelani_tower_a_b': '',
@@ -215,7 +205,7 @@
     'hemenway_hall_kitchen': '',
     'hemenway_hall_main': '',
     'hig_noaa': '',
-    'hig_panel_pb	': '',
+    'hig_panel_pb': '',
     'hig_panel_pba': '',
     'hig_substation_1_main': '',
     'hig_substation_2_main': '',
@@ -251,58 +241,58 @@
     'life_sciences_msb3_elev1': '',
     'life_sciences_msb3_elev2': '',
     'life_sciences_msb3_xmr2aes': '',
-    'life_sciences_msb3_xmr2bes	': '',
+    'life_sciences_msb3_xmr2bes': '',
     'life_sciences_msb3_xmr2ces': '',
-    'life_sciences_msb4_4aec1	': '',
+    'life_sciences_msb4_4aec1': '',
     'life_sciences_msb4_4bec1': '',
-    'life_sciences_msb4_4cec1	': '',
-    'lincoln_hall_main	': '',
-    'maintenance_shop_main	': '',
+    'life_sciences_msb4_4cec1': '',
+    'lincoln_hall_main': '',
+    'maintenance_shop_main': '',
     'malama_1_2_ehso_main': '',
-    'malama_3_4_dive_safety_main	': '',
-    'marine_science_main_a	': '',
-    'marine_science_main_b	': '',
-    'marine_science_mcc	': '',
+    'malama_3_4_dive_safety_main': '',
+    'marine_science_main_a': '',
+    'marine_science_main_b': '',
+    'marine_science_mcc': '',
     'miller_hall_main': '',
-    'moore_hall_main	': '',
-    'multipurpose_bldg_main	': '',
-    'music_complex_main	': '',
-    'pamoa_buildings_main	': '',
-    'paradise_palms_main	': '',
-    'parking_struct_ph_i_main	': '',
-    'pbrc_main_b	': '',
+    'moore_hall_main': '',
+    'multipurpose_bldg_main': '',
+    'music_complex_main': '',
+    'pamoa_buildings_main': '',
+    'paradise_palms_main': '',
+    'parking_struct_ph_i_main': '',
+    'pbrc_main_b': '',
     'physical_plant_bldg_main': '',
     'physical_science_keller_comp': '',
-    'physical_science_main	': '',
-    'pope_lab_main	': '',
-    'post_chiller_plant_main	': '',
-    'post_main_1	': '',
-    'post_main_2	': '',
-    'qlcss_main	': '',
+    'physical_science_main': '',
+    'pope_lab_main': '',
+    'post_chiller_plant_main': '',
+    'post_main_1': '',
+    'post_main_2': '',
+    'qlcss_main': '',
     'quad_chiller_plant_main': '',
     'sakamaki_hall_ac_eqpt': '',
-    'sakamaki_hall_main	': '',
-    'saunders_hall_main_a	': '',
-    'saunders_hall_main_b	': '',
+    'sakamaki_hall_main': '',
+    'saunders_hall_main_a': '',
+    'saunders_hall_main_b': '',
     'sherman_main_1': '',
     'sherman_main_2': '',
-    'sinclair_lib_main	': '',
-    'softball_tennis_main	': '',
-    'spalding_hall_main	': '',
+    'sinclair_lib_main': '',
+    'softball_tennis_main': '',
+    'spalding_hall_main': '',
     'st_john_plant_science_main': '',
-    'stan_sheriff_ctr_main_1	': '',
+    'stan_sheriff_ctr_main_1': '',
     'stan_sheriff_ctr_main_2': '',
-    'student_health_main	': '',
+    'student_health_main': '',
     'transportation_srvc_main': '',
     'univ_high_school_3_main': '',
     'warrior_rec_ctr_main': '',
-    'webster_hall_main	': '',
-    'wist_annex_1_main	': '',
+    'webster_hall_main': '',
+    'wist_annex_1_main': '',
     'wist_hall_main': ''
   };
 
   // Event listener for meter selection
-  meterNameSelect.addEventListener('change', function() {
+  meterNameSelect.addEventListener('change', function () {
     const selectedMeter = meterNameSelect.value;
     if (grafanaUrls[selectedMeter]) {
       meterGraph.src = grafanaUrls[selectedMeter];
