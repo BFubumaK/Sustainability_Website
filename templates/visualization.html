@@ -37,7 +37,7 @@
   <!-- Dropdown for meter names -->
   <form id="meterForm" action="" method="POST">
     <div class="mb-3">
-      <select class="form-select" id="meter_name" name="meter_name" required>
+      <label for="meter_name"></label><select class="form-select" id="meter_name" name="meter_name" required>
         <option value="" disabled selected>Select a meter</option>
         {% for meter in meters %}
           <option value="{{ meter }}">{{ meter }}</option>
@@ -48,7 +48,7 @@
 
   <!-- Container for Grafana graph -->
   <div class="canvas-container mt-4">
-    <iframe id="meterGraph" src="" width="100%" height="400px" frameborder="0"></iframe>
+    <iframe id="meterGraph" src="" width="100%" height="400px"></iframe>
   </div>
 </div>
 
