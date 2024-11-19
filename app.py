@@ -1,14 +1,39 @@
-# Import required modules
 import os
 import secrets
-
 import psycopg2
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(16))
 
+# Sample list of buildings (manually defined in this case)
+# Ideally, you would pull these from the database or an external source
+buildings = [
+    'admin_serv_1',
+    'admin_serv_2_main',
+    'ag_engineering_main',
+    'ag_engineering_mcc',
+    'ag_science_main_1',
+    'ag_science_main_2',
+    'andrews_amp_main',
+    'architecture_main',
+    'bachman_hall_main',
+    'biomedical_science_ch_1',
+    'biomedical_science_ch_2',
+    # Add the rest of your buildings here...
+]
+
+# Define meter mappings by building
+meters_by_building = {
+    'admin_serv_1': ['admin_serv_1'],
+    'admin_serv_2_main': ['admin_serv_2_main'],
+    'ag_engineering_main': ['ag_engineering_main'],
+    'ag_engineering_mcc': ['ag_engineering_mcc'],
+    'ag_science_main_1': ['ag_science_main_1'],
+    'ag_science_main_2': ['ag_science_main_2'],
+    # Add the rest of your meter mappings here...
+}
 
 # Database connection setup
 def get_db_connection():
@@ -16,12 +41,10 @@ def get_db_connection():
     conn = psycopg2.connect(database="postgres", user="postgres", password="Uhosremote!", port="5433")
     return conn
 
-
 # Render home page
 @app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
-
 
 # Render database page with most recent KWH data, sorted by meter name
 @app.route('/show_entire_csv_data', methods=['GET'])
@@ -42,26 +65,18 @@ def show_recent_data():
     # Render template with sorted KWH data
     return render_template('entire_csv_data.html', kwh=kwh_sorted)
 
-
 # Render visualization page
 @app.route('/visualization', methods=['GET', 'POST'])
 def visualization():
-    conn = get_db_connection()
-    cur = conn.cursor()
+    # Pass the list of buildings to the template
+    return render_template('visualization.html', buildings=buildings)
 
-    # Fetch distinct meter names from the database
-    cur.execute('SELECT DISTINCT meter_name FROM kwh.kwh_last24hrs ORDER BY meter_name;')
-    meter_names = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    # Extract meter names from the result (list of tuples)
-    meter_names_list = [meter[0] for meter in meter_names]
-
-    # Render the visualization template and pass meter names
-    return render_template('visualization.html', meters=meter_names_list)
-
+# API to handle meter data based on selected building
+@app.route('/get_meters_for_building', methods=['POST'])
+def get_meters_for_building():
+    building = request.form.get('building_name')
+    meters_for_building = meters_by_building.get(building, [])
+    return {'meters': meters_for_building}
 
 if __name__ == '__main__':
     app.run(debug=True)

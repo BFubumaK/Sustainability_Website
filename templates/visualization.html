@@ -32,16 +32,27 @@
 
 <!-- Visualization section -->
 <div class="container my-5">
-  <h2 class="table-header-name">Select a Meter for Visualization</h2>
+  <h2 class="table-header-name">Select a Building and Meter for Visualization</h2>
 
-  <!-- Dropdown for meter names -->
-  <form id="meterForm" action="" method="POST">
+  <!-- Dropdown for building names -->
+  <form id="buildingForm" action="" method="POST">
     <div class="mb-3">
-      <label for="meter_name"></label><select class="form-select" id="meter_name" name="meter_name" required>
-        <option value="" disabled selected>Select a meter</option>
-        {% for meter in meters %}
-          <option value="{{ meter }}">{{ meter }}</option>
+      <label for="building_name">Select Building</label>
+      <select class="form-select" id="building_name" name="building_name" required>
+        <option value="" disabled selected>Select a building</option>
+        {% for building in buildings %}
+          <option value="{{ building }}">{{ building }}</option>
         {% endfor %}
+      </select>
+    </div>
+  </form>
+
+  <!-- Dropdown for meter names (hidden initially) -->
+  <form id="meterForm" action="" method="POST" style="display: none;">
+    <div class="mb-3">
+      <label for="meter_name">Select Meter</label>
+      <select class="form-select" id="meter_name" name="meter_name" required>
+        <option value="" disabled selected>Select a meter</option>
       </select>
     </div>
   </form>
@@ -88,6 +99,46 @@
 <script>
   const meterGraph = document.getElementById('meterGraph');
   const meterNameSelect = document.getElementById('meter_name');
+  const buildingNameSelect = document.getElementById('building_name');
+  const meterForm = document.getElementById('meterForm');
+
+  // Map meter names to buildings
+  const metersByBuilding = {
+    'admin_serv_1': ['admin_serv_1'],
+    'admin_serv_2_main': ['admin_serv_2_main'],
+    'ag_engineering_main': ['ag_engineering_main'],
+    'ag_engineering_mcc': ['ag_engineering_mcc'],
+    'ag_science_main_1': ['ag_science_main_1'],
+    'ag_science_main_2': ['ag_science_main_2'],
+    // Add all relevant meter names per building
+    // Example:
+    'andrews_amp_main': ['andrews_amp_main'],
+    'architecture_main': ['architecture_main'],
+    'bachman_hall_main': ['bachman_hall_main'],
+    'biomedical_science_ch_1': ['biomedical_science_ch_1'],
+    'biomedical_science_ch_2': ['biomedical_science_ch_2'],
+    // etc...
+  };
+
+  // Event listener for building selection
+  buildingNameSelect.addEventListener('change', function() {
+    const selectedBuilding = this.value;
+    const metersForBuilding = metersByBuilding[selectedBuilding] || [];
+
+    // Clear previous meter options
+    meterNameSelect.innerHTML = '<option value="" disabled selected>Select a meter</option>';
+
+    // Populate meter dropdown with relevant meters
+    metersForBuilding.forEach(function(meter) {
+      const option = document.createElement('option');
+      option.value = meter;
+      option.textContent = meter;
+      meterNameSelect.appendChild(option);
+    });
+
+    // Show the meter dropdown once a building is selected
+    meterForm.style.display = metersForBuilding.length > 0 ? 'block' : 'none';
+  });
 
   // Map meter names to Grafana URLs
   const grafanaUrls = {
@@ -250,11 +301,17 @@
     'wist_hall_main': ''
   };
 
-  // Update the iframe source based on the selected meter
-  meterNameSelect.addEventListener('change', function () {
-    const selectedMeter = this.value;
-    meterGraph.src = grafanaUrls[selectedMeter] || '';
+  // Event listener for meter selection
+  meterNameSelect.addEventListener('change', function() {
+    const selectedMeter = meterNameSelect.value;
+    if (grafanaUrls[selectedMeter]) {
+      meterGraph.src = grafanaUrls[selectedMeter];
+    } else {
+      meterGraph.src = '';  // clear iframe if no URL is mapped
+    }
   });
+
 </script>
+
 </body>
 </html>
