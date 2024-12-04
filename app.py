@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(16))
 
 # List of Buildings
-Buildings = [
+buildings = [
     'Administration Services Building 1',
     'Administration Services Building 2',
     'Agricultural Engineering Institute',
@@ -107,7 +107,7 @@ Buildings = [
 ]
 
 # Define meter mappings by Building
-meters_by_Building = {
+meters_by_building = {
     'ADMIN SERV 1': ['admin_serv_1'],
     'ADMIN SERV 2': ['admin_serv_2'],
     'AG ENGINEERING': ['ag_engineering_Main', 'ag_engineering_mcc'],
@@ -136,7 +136,7 @@ def show_recent_data():
 
     # Fetch only the most recent data (e.g., last 156 records) from the postgres schema
     cur.execute('SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh_last24hrs ORDER BY datetime DESC LIMIT 156;')
-    kwh = cur.fetcHall()
+    kwh = cur.fetchall()  # Correct method call
 
     cur.close()
     conn.close()
@@ -152,16 +152,16 @@ def show_recent_data():
 @app.route('/visualization', methods=['GET', 'POST'])
 def visualization():
     # Pass the list of Buildings to the template
-    return render_template('visualization.html', Buildings=Buildings)
+    return render_template('visualization.html', Buildings=buildings)
 
 
 # API to handle meter data based on selected Building
-@app.route('/get_meters_for_Building', methods=['POST'])
-def get_meters_for_Building():
+@app.route('/get_meters_for_building', methods=['POST'])
+def get_meters_for_building():
     Building = request.form.get('Building_name')
-    meters_for_Building = meters_by_Building.get(Building, [])
+    meters_for_Building = meters_by_building.get(Building, [])
     return {'meters': meters_for_Building}
 
 
-if __name__ == '__Main__':
+if __name__ == '__main__':
     app.run(debug=True)
