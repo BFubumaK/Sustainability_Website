@@ -8,8 +8,8 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(16))
 
-# List of buildings
-buildings = [
+# List of Buildings
+Buildings = [
     'Administration Services Building 1',
     'Administration Services Building 2',
     'Agricultural Engineering Institute',
@@ -43,75 +43,75 @@ buildings = [
     'Hale Aloha Lehua',
     'Hale Aloha Lokelani',
     'Hale Aloha Mokihana',
-    'HALE HALAWAI',
-    'HALE KAHAWAI',
-    'HALE KUAHINE',
-    'HALE LAULIMA',
-    'HALE MANOA',
-    'HALE NOELANI',
-    'HALE WAINANI',
-    'HAMILTON LIBRARY',
-    'HAWAII HALL',
-    'HEMENWAY HALL',
-    'HIG',
-    'HPER KLUM',
-    'HPER MAIN',
-    'HOLMES HALL',
-    'JEFFERSON HALL',
-    'JOHNSON HALL',
-    'KELLER HALL',
-    'KENNEDY THEATRE',
-    'KOREAN STUDIES',
-    'KRAUSS HALL',
-    'KUYKENDALL HALL',
-    'LAW LIBRARY',
-    'LAW SCHOOL',
-    'LES MURAKAMI STADIUM',
-    'LIFE SCIENCES',
-    'LINCOLN HALL',
-    'MAINTENANCE SHOP',
-    'MALAMA EHSO',
-    'MALAMA DIVE SAFETY',
-    'MARINE SCIENCE',
-    'MILLER HALL',
-    'MOORE HALL',
-    'MULTIPURPOSE BUILDING',
-    'MUSIC COMPLEX',
-    'PAMOA BLDG',
-    'PARADISE PALMS',
-    'PARKING STRUCTURE PHASE 1',
-    'PARKING STRUCTURE PHASE 2',
-    'PBRC MAIN A',
-    'PBRC MAIN B',
-    'PHYSICAL PLANT BLDG',
-    'PHYSICAL SCIENCE',
-    'POPE LAB',
-    'POST',
-    'QLCSS',
-    'QUAD CHILLER PLANT',
-    'SAKAMAKI HALL',
-    'SAUNDERS HALL',
-    'SHERMAN',
-    'SINCLAIR LIB',
-    'SOFTBALL TENNIS',
-    'SPALDING HALL',
-    'ST JOHN PLAN SCIENCE',
-    'STAN SHERIFF CTR',
-    'STUDENT HEALTH',
-    'TRANSPORTATION SERVICES',
-    'UNIV HIGH SCHOOL',
-    'WARRIOR REC CTR',
-    'WEBSTER HALL',
-    'WIST ANNEX',
-    'WIST HALL'
+    'Hale Halawai',
+    'Hale Kahawai',
+    'Hale Kuahine',
+    'Hale Laulima',
+    'Hale Manoa',
+    'Hale Noelani',
+    'Hale Wainani',
+    'Hamilton Library',
+    'Hawaii Hall',
+    'Hemenway Hall',
+    'Hawaii Institute of Geophysics',
+    'Health and Physical Education and Recreation Klum Gym',
+    'Health and Physical Education and Recreation Main',
+    'Holmes Hall',
+    'Jefferson Hall',
+    'Johnson Hall',
+    'Keller Hall',
+    'Kennedy Theatre',
+    'Center for Korean Studies',
+    'Krauss Hall',
+    'Kuykendall Hall',
+    'Law Library',
+    'Law School',
+    'Les Murakami Stadium',
+    'Life Sciences',
+    'Lincoln Hall',
+    'Maintenance Shop',
+    'Malama Environmental Health & Safety',
+    'Malama Dive Safety',
+    'Marine Sciences Building',
+    'Miller Hall',
+    'Moore Hall',
+    'Multipurpose Building',
+    'Music Building Complex',
+    'Pamoa Building',
+    'Paradise Palms',
+    'Parking Structure Phase 1',
+    'Parking Structure Phase 2',
+    'Pacific Biosciences Research Center Main A',
+    'Pacific Biosciences Research Center Main B',
+    'Physical Plant Building',
+    'Physical Science Building',
+    'Pope Laboratory',
+    'Pacific Ocean Science and Technology',
+    'Queen Liliʻuokalani Center for Student Services',
+    'Quad Chiller Plant',
+    'Sakamaki Hall',
+    'Saunders Hall',
+    'Sherman Laboratory',
+    'Sinclair',
+    'Softball Tennis',
+    'Spalding Hall',
+    'St. John Plant Science Lab',
+    'Stan Sheriff Center',
+    'Health Services',
+    'Transportation Services',
+    'University High School',
+    'Warrior Recreation Center',
+    'Webster Hall',
+    'Wist Annex 1',
+    'Wist Hall'
 ]
 
-# Define meter mappings by building
-meters_by_building = {
+# Define meter mappings by Building
+meters_by_Building = {
     'ADMIN SERV 1': ['admin_serv_1'],
     'ADMIN SERV 2': ['admin_serv_2'],
-    'AG ENGINEERING': ['ag_engineering_main', 'ag_engineering_mcc'],
-    'AG SCIENCE': ['ag_science_main_1', 'ag_science_main_2', 'ag_science_mcc']
+    'AG ENGINEERING': ['ag_engineering_Main', 'ag_engineering_mcc'],
+    'AG Science': ['ag_Science_Main_1', 'ag_Science_Main_2', 'ag_Science_mcc']
 }
 
 
@@ -136,7 +136,7 @@ def show_recent_data():
 
     # Fetch only the most recent data (e.g., last 156 records) from the postgres schema
     cur.execute('SELECT datetime, meter_reading, meter_name, stuck FROM kwh.kwh_last24hrs ORDER BY datetime DESC LIMIT 156;')
-    kwh = cur.fetchall()
+    kwh = cur.fetcHall()
 
     cur.close()
     conn.close()
@@ -151,17 +151,17 @@ def show_recent_data():
 # Render visualization page
 @app.route('/visualization', methods=['GET', 'POST'])
 def visualization():
-    # Pass the list of buildings to the template
-    return render_template('visualization.html', buildings=buildings)
+    # Pass the list of Buildings to the template
+    return render_template('visualization.html', Buildings=Buildings)
 
 
-# API to handle meter data based on selected building
-@app.route('/get_meters_for_building', methods=['POST'])
-def get_meters_for_building():
-    building = request.form.get('building_name')
-    meters_for_building = meters_by_building.get(building, [])
-    return {'meters': meters_for_building}
+# API to handle meter data based on selected Building
+@app.route('/get_meters_for_Building', methods=['POST'])
+def get_meters_for_Building():
+    Building = request.form.get('Building_name')
+    meters_for_Building = meters_by_Building.get(Building, [])
+    return {'meters': meters_for_Building}
 
 
-if __name__ == '__main__':
+if __name__ == '__Main__':
     app.run(debug=True)
