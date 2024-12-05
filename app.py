@@ -108,10 +108,13 @@ buildings = [
 
 # Define meter mappings by Building
 meters_by_building = {
-    'ADMIN SERV 1': ['admin_serv_1'],
-    'ADMIN SERV 2': ['admin_serv_2'],
-    'AG ENGINEERING': ['ag_engineering_Main', 'ag_engineering_mcc'],
-    'AG Science': ['ag_Science_Main_1', 'ag_Science_Main_2', 'ag_Science_mcc']
+    'Administration Services Building 1': ['admin_serv_1'],
+    'Administration Services Building 2': ['admin_serv_2'],
+    'Agricultural Engineering Institute': ['ag_engineering_main', 'ag_engineering_mcc'],
+    'Agricultural Science': ['ag_science_main_1', 'ag_science_main_2', 'ag_science_mcc'],
+    'Andrews Outdoor Theatre': ['andrews_amp_main'],
+    'Architecture School': ['archtecture_main'],
+    'Bachman Hall': ['bachman_hall_main']
 }
 
 
