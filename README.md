@@ -1,7 +1,7 @@
 # Sustainability_Website
 Website for the Office of Sustainability that integrates PostgreSQL kilowatt-hour data.
 
-## How to Launch Website:
+## How to Launch Website
 In the terminal, type
 ```
 cd C:\Users\Admin\Documents\GitHub\Sustainability_Website
@@ -15,7 +15,7 @@ In your browser, go to
 http://localhost:5000/
 ```
 
-## How to Launch Grafana:
+## How to Launch Grafana
 In the terminal, type
 ```
 cd C:\Program Files\GrafanaLabs\grafana\bin
