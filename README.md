@@ -1,6 +1,6 @@
 # Sustainability_Website
 Website for the Office of Sustainability that integrates PostgreSQL kilowatt-hour data.
-
+![Alt text](website-screenshot.png)
 ## How to Launch Website
 In the terminal, type
 ```
