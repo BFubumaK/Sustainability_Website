@@ -29,4 +29,4 @@ In your browser, go to
 http://localhost:8081/
 ```
 
-**Note: The Database page will not load without a PostgreSQL connection, and the Visualization page will not load without a Grafana connection.**
+**Note: The Database page will not load without a PostgreSQL connection.**
